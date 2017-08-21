@@ -35,7 +35,7 @@ export class AppsProfile implements OnInit {
           nextYear: 'none fa fa-arrow-right'
         },
         Actionable: true,
-        eventLimit: true, // allow "more" link when too many events
+        eventLimit: true, // allow 'more' link when too many events
         viewRender: function(view, element) {
           if (!(/Mobi/.test(navigator.userAgent)) && jQuery().jScrollPane) {
             $('.fc-scroller').jScrollPane({
@@ -83,22 +83,22 @@ export class AppsProfile implements OnInit {
       $('.swal-btn-success').click(function(e){
         e.preventDefault();
         swal({
-          title: "Following",
-          text: "Now you are following Artour Scott",
-          type: "success",
-          confirmButtonClass: "btn-success",
-          confirmButtonText: "Ok"
+          title: 'Following',
+          text: 'Now you are following Artour Scott',
+          type: 'success',
+          confirmButtonClass: 'btn-success',
+          confirmButtonText: 'Ok'
         });
       });
 
       $('.swal-btn-success-2').click(function(e){
         e.preventDefault();
         swal({
-          title: "Friends request",
-          text: "Friends request was succesfully sent to Artour Scott",
-          type: "success",
-          confirmButtonClass: "btn-success",
-          confirmButtonText: "Ok"
+          title: 'Friends request',
+          text: 'Friends request was succesfully sent to Artour Scott',
+          type: 'success',
+          confirmButtonClass: 'btn-success',
+          confirmButtonText: 'Ok'
         });
       });
 

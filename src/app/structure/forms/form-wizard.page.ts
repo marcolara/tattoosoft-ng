@@ -12,17 +12,17 @@ export class FormsFormWizard implements OnInit {
 
     $(function() {
 
-      $("#example-icons").steps({
-        headerTag: "h3",
-        bodyTag: "section",
-        transitionEffect: "slideLeft",
+      $('#example-icons').steps({
+        headerTag: 'h3',
+        bodyTag: 'section',
+        transitionEffect: 'slideLeft',
         autoFocus: true
       });
 
-      $("#example-numbers").steps({
-        headerTag: "h3",
-        bodyTag: "section",
-        transitionEffect: "slideLeft",
+      $('#example-numbers').steps({
+        headerTag: 'h3',
+        bodyTag: 'section',
+        transitionEffect: 'slideLeft',
         autoFocus: true
       });
 

@@ -82,12 +82,12 @@ export class MenuRightComponent implements OnInit {
 
           $('body').removeClass(removeClasses).addClass(addClass);
 
-          if ($(this).find('input').attr('name') == 'options-colorful' && $(this).find('input').val() == 'cat__menu-left--colorful') {
+          if ($(this).find('input').attr('name') === 'options-colorful' && $(this).find('input').val() === 'cat__menu-left--colorful') {
             $('body').trigger('removeColorfulClasses');
             $('body').trigger('setColorfulClasses');
           }
 
-          if ($(this).find('input').attr('name') == 'options-colorful' && $(this).find('input').val() == '') {
+          if ($(this).find('input').attr('name') === 'options-colorful' && $(this).find('input').val() === '') {
             $('body').trigger('removeColorfulClasses');
           }
         });

@@ -35,7 +35,7 @@ export class DashboardsAlpha implements OnInit {
 
       ///////////////////////////////////////////////////////////
       // tooltips
-      $("[data-toggle=tooltip]").tooltip();
+      $('[data-toggle=tooltip]').tooltip();
 
       ///////////////////////////////////////////////////////////
       // jquery ui sortable
@@ -73,7 +73,7 @@ export class DashboardsAlpha implements OnInit {
           },
 
           // handler
-          handle: ".card-header"
+          handle: '.card-header'
         });
       });
 
@@ -126,7 +126,7 @@ export class DashboardsAlpha implements OnInit {
           nextYear: 'none fa fa-arrow-right'
         },
         editable: true,
-        eventLimit: true, // allow "more" link when too many events
+        eventLimit: true, // allow 'more' link when too many events
         viewRender: function(view, element) {
           if (!(/Mobi/.test(navigator.userAgent)) && jQuery().jScrollPane) {
             $('.fc-scroller').jScrollPane({
@@ -175,8 +175,8 @@ export class DashboardsAlpha implements OnInit {
 
       ///////////////////////////////////////////////////////////
       // chart1
-      new Chartist.Line(".chart-line", {
-        labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      new Chartist.Line('.chart-line', {
+        labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
         series: [
           [5, 0, 7, 8, 12],
           [2, 1, 3.5, 7, 3],
@@ -195,7 +195,7 @@ export class DashboardsAlpha implements OnInit {
       ///////////////////////////////////////////////////////////
       // chart 2
       var overlappingData = {
-          labels: ["Jan", "Feb", "Mar", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
           series: [
             [5, 4, 3, 7, 5, 10, 3, 4, 8, 10, 6, 8],
             [3, 2, 9, 5, 4, 6, 4, 6, 7, 8, 7, 4]
@@ -208,7 +208,7 @@ export class DashboardsAlpha implements OnInit {
           ]
         },
         overlappingResponsiveOptions = [
-          ["", {
+          ['', {
             seriesBarDistance: 5,
             axisX: {
               labelInterpolationFnc: function(value) {
@@ -218,7 +218,7 @@ export class DashboardsAlpha implements OnInit {
           }]
         ];
 
-      new Chartist.Bar(".chart-overlapping-bar", overlappingData, overlappingOptions, overlappingResponsiveOptions);
+      new Chartist.Bar('.chart-overlapping-bar', overlappingData, overlappingOptions, overlappingResponsiveOptions);
 
 
       ///////////////////////////////////////////////////////////
@@ -249,7 +249,7 @@ export class DashboardsAlpha implements OnInit {
 
       ///////////////////////////////////////////////////////////
       // slider
-      $("#slider-1").ionRangeSlider({
+      $('#slider-1').ionRangeSlider({
         min: 0,
         max: 16000,
         from: 12000,
@@ -258,8 +258,8 @@ export class DashboardsAlpha implements OnInit {
         grid_num: 8
       });
 
-      $("#slider-2").ionRangeSlider({
-        type: "double",
+      $('#slider-2').ionRangeSlider({
+        type: 'double',
         min: 0,
         max: 100,
         from: 20,

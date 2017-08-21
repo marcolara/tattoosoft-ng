@@ -17,7 +17,7 @@ export class ChartsChartistJs implements OnInit {
 
       // CSS STYLING & ANIMATIONS
       var cssAnimationData = {
-          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
           series: [
             [1, 2, 2.7, 0, 3, 5, 3, 4, 8, 10, 12, 7],
             [0, 1.2, 2, 7, 2.5, 9, 5, 8, 9, 11, 14, 4],
@@ -34,7 +34,7 @@ export class ChartsChartistJs implements OnInit {
           }]
         ];
 
-      new Chartist.Line(".chart-css-animations", cssAnimationData, {
+      new Chartist.Line('.chart-css-animations', cssAnimationData, {
         plugins: [
           Chartist.plugins.tooltip()
         ]}, cssAnimationResponsiveOptions);
@@ -42,8 +42,8 @@ export class ChartsChartistJs implements OnInit {
 
 
       // SMIL ANIMATIONS
-      var animationsChart = new Chartist.Line(".chart-smil-animations", {
-          labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+      var animationsChart = new Chartist.Line('.chart-smil-animations', {
+          labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
           series: [
             [12, 9, 7, 8, 5, 4, 6, 2, 3, 3, 4, 6],
             [4, 5, 3, 7, 3, 5, 5, 3, 4, 4, 5, 5],
@@ -60,10 +60,10 @@ export class ChartsChartistJs implements OnInit {
         delays = 80,
         durations = 500;
 
-      animationsChart.on("created", function() {
+      animationsChart.on('created', function() {
         seq = 0
-      }), animationsChart.on("draw", function(data) {
-        if (seq++, "line" === data.type) data.element.animate({
+      }), animationsChart.on('draw', function(data) {
+        if (seq++, 'line' === data.type) data.element.animate({
           opacity: {
             begin: seq * delays + 1e3,
             dur: durations,
@@ -71,66 +71,66 @@ export class ChartsChartistJs implements OnInit {
             to: 1
           }
         });
-        else if ("label" === data.type && "x" === data.axis) data.element.animate({
+        else if ('label' === data.type && 'x' === data.axis) data.element.animate({
           y: {
             begin: seq * delays,
             dur: durations,
             from: data.y + 100,
             to: data.y,
-            easing: "easeOutQuart"
+            easing: 'easeOutQuart'
           }
         });
-        else if ("label" === data.type && "y" === data.axis) data.element.animate({
+        else if ('label' === data.type && 'y' === data.axis) data.element.animate({
           x: {
             begin: seq * delays,
             dur: durations,
             from: data.x - 100,
             to: data.x,
-            easing: "easeOutQuart"
+            easing: 'easeOutQuart'
           }
         });
-        else if ("point" === data.type) data.element.animate({
+        else if ('point' === data.type) data.element.animate({
           x1: {
             begin: seq * delays,
             dur: durations,
             from: data.x - 10,
             to: data.x,
-            easing: "easeOutQuart"
+            easing: 'easeOutQuart'
           },
           x2: {
             begin: seq * delays,
             dur: durations,
             from: data.x - 10,
             to: data.x,
-            easing: "easeOutQuart"
+            easing: 'easeOutQuart'
           },
           opacity: {
             begin: seq * delays,
             dur: durations,
             from: 0,
             to: 1,
-            easing: "easeOutQuart"
+            easing: 'easeOutQuart'
           }
         });
-        else if ("grid" === data.type) {
+        else if ('grid' === data.type) {
           var pos1Animation = {
               begin: seq * delays,
               dur: durations,
-              from: data[data.axis.units.pos + "1"] - 30,
-              to: data[data.axis.units.pos + "1"],
-              easing: "easeOutQuart"
+              from: data[data.axis.units.pos + '1'] - 30,
+              to: data[data.axis.units.pos + '1'],
+              easing: 'easeOutQuart'
             },
             pos2Animation = {
               begin: seq * delays,
               dur: durations,
-              from: data[data.axis.units.pos + "2"] - 100,
-              to: data[data.axis.units.pos + "2"],
-              easing: "easeOutQuart"
+              from: data[data.axis.units.pos + '2'] - 100,
+              to: data[data.axis.units.pos + '2'],
+              easing: 'easeOutQuart'
             },
             ctAnimations = {};
-            ctAnimations[data.axis.units.pos + "1"] = pos1Animation, ctAnimations[data.axis.units.pos + "2"] = pos2Animation, data.element.animate(ctAnimations)
+            ctAnimations[data.axis.units.pos + '1'] = pos1Animation, ctAnimations[data.axis.units.pos + '2'] = pos2Animation, data.element.animate(ctAnimations)
         }
-      }), animationsChart.on("created", function() {
+      }), animationsChart.on('created', function() {
       });
 
 
@@ -153,7 +153,7 @@ export class ChartsChartistJs implements OnInit {
           showLine: !1,
           axisX: {
             labelInterpolationFnc: function(value, index) {
-              return index % 13 === 0 ? "W" + value : null
+              return index % 13 === 0 ? 'W' + value : null
             }
           },
           plugins: [
@@ -161,22 +161,22 @@ export class ChartsChartistJs implements OnInit {
           ]
         },
         ctScatterResponsiveOptions = [
-          ["screen and (min-width: 640px)", {
+          ['screen and (min-width: 640px)', {
             axisX: {
               labelInterpolationFnc: function(value, index) {
-                return index % 4 === 0 ? "W" + value : null
+                return index % 4 === 0 ? 'W' + value : null
               }
             }
           }]
         ];
 
-      new Chartist.Line(".chart-scatter", ctScatterData, ctScatterOptions, ctScatterResponsiveOptions);
+      new Chartist.Line('.chart-scatter', ctScatterData, ctScatterOptions, ctScatterResponsiveOptions);
 
 
 
       // LINE
-      new Chartist.Line(".chart-line", {
-        labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      new Chartist.Line('.chart-line', {
+        labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
         series: [
           [12, 9, 7, 8, 5],
           [2, 1, 3.5, 7, 3],
@@ -195,7 +195,7 @@ export class ChartsChartistJs implements OnInit {
 
 
       // AREA
-      new Chartist.Line(".chart-area", {
+      new Chartist.Line('.chart-area', {
         labels: [1, 2, 3, 4, 5, 6, 7, 8],
         series: [
           [5, 9, 7, 8, 5, 3, 5, 4]
@@ -211,7 +211,7 @@ export class ChartsChartistJs implements OnInit {
 
 
       // BI POLAR LINE
-      new Chartist.Line(".chart-bi-polar-line", {
+      new Chartist.Line('.chart-bi-polar-line', {
         labels: [1, 2, 3, 4, 5, 6, 7, 8],
         series: [
           [1, 2, 3, 1, -2, 0, 1, 0],
@@ -239,7 +239,7 @@ export class ChartsChartistJs implements OnInit {
 
       // BI POLAR BAR
       var biPolarData = {
-          labels: ["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8", "W9", "W10"],
+          labels: ['W1', 'W2', 'W3', 'W4', 'W5', 'W6', 'W7', 'W8', 'W9', 'W10'],
           series: [
             [1, 2, 4, 8, 6, -2, -1, -4, -6, -2]
           ]
@@ -257,13 +257,13 @@ export class ChartsChartistJs implements OnInit {
           ]
         };
 
-      new Chartist.Bar(".chart-bi-polar-bar", biPolarData, biPolarOptions);
+      new Chartist.Bar('.chart-bi-polar-bar', biPolarData, biPolarOptions);
 
 
 
       // OVERLAPPING BAR
       var overlappingData = {
-          labels: ["Jan", "Feb", "Mar", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
           series: [
             [5, 4, 3, 7, 5, 10, 3, 4, 8, 10, 6, 8],
             [3, 2, 9, 5, 4, 6, 4, 6, 7, 8, 7, 4]
@@ -276,7 +276,7 @@ export class ChartsChartistJs implements OnInit {
           ]
         },
         overlappingResponsiveOptions = [
-          ["", {
+          ['', {
             seriesBarDistance: 5,
             axisX: {
               labelInterpolationFnc: function(value) {
@@ -286,13 +286,13 @@ export class ChartsChartistJs implements OnInit {
           }]
         ];
 
-      new Chartist.Bar(".chart-overlapping-bar", overlappingData, overlappingOptions, overlappingResponsiveOptions);
+      new Chartist.Bar('.chart-overlapping-bar', overlappingData, overlappingOptions, overlappingResponsiveOptions);
 
 
 
       // HORIZONTAL BAR
-      new Chartist.Bar(".chart-horizontal-bar", {
-        labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      new Chartist.Bar('.chart-horizontal-bar', {
+        labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
         series: [
           [5, 4, 3, 7, 5, 10, 3],
           [3, 2, 9, 5, 4, 6, 4]
@@ -312,8 +312,8 @@ export class ChartsChartistJs implements OnInit {
 
 
       // STACKED BAR
-      new Chartist.Bar(".chart-stacked-bar", {
-        labels: ["Q1", "Q2", "Q3", "Q4"],
+      new Chartist.Bar('.chart-stacked-bar', {
+        labels: ['Q1', 'Q2', 'Q3', 'Q4'],
         series: [
           [8e5, 12e5, 14e5, 13e5],
           [2e5, 4e5, 5e5, 3e5],
@@ -323,15 +323,15 @@ export class ChartsChartistJs implements OnInit {
         stackBars: !0,
         axisY: {
           labelInterpolationFnc: function(value) {
-            return value / 1e3 + "k"
+            return value / 1e3 + 'k'
           }
         },
         plugins: [
           Chartist.plugins.tooltip()
         ]
-      }).on("draw", function(data) {
-        "bar" === data.type && data.element.attr({
-          style: "stroke-width: 30px"
+      }).on('draw', function(data) {
+        'bar' === data.type && data.element.attr({
+          style: 'stroke-width: 30px'
         })
       });
 
@@ -345,9 +345,9 @@ export class ChartsChartistJs implements OnInit {
           return a + b
         };
 
-      new Chartist.Pie(".chart-simple-pie", simplePiedata, {
+      new Chartist.Pie('.chart-simple-pie', simplePiedata, {
         labelInterpolationFnc: function(value) {
-          return Math.round(value / simplePiedata.series.reduce(simplePieSum) * 100) + "%"
+          return Math.round(value / simplePiedata.series.reduce(simplePieSum) * 100) + '%'
         }
       });
 
@@ -355,7 +355,7 @@ export class ChartsChartistJs implements OnInit {
 
       // PIE WITH LABELS
       var labelsPieData = {
-          labels: ["Bananas", "Apples", "Grapes"],
+          labels: ['Bananas', 'Apples', 'Grapes'],
           series: [20, 15, 40]
         },
         labelsPieOptions = {
@@ -364,21 +364,21 @@ export class ChartsChartistJs implements OnInit {
           }
         },
         labelsPieResponsiveOptions = [
-          ["screen and (min-width: 640px)", {
+          ['screen and (min-width: 640px)', {
             chartPadding: 30,
             labelOffset: 100,
-            labelDirection: "explode",
+            labelDirection: 'explode',
             labelInterpolationFnc: function(value) {
               return value
             }
           }],
-          ["screen and (min-width: 1024px)", {
+          ['screen and (min-width: 1024px)', {
             labelOffset: 80,
             chartPadding: 20
           }]
         ];
 
-      new Chartist.Pie(".chart-pie-w-labels", labelsPieData, labelsPieOptions, labelsPieResponsiveOptions);
+      new Chartist.Pie('.chart-pie-w-labels', labelsPieData, labelsPieOptions, labelsPieResponsiveOptions);
 
     });
 

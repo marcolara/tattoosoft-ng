@@ -13,7 +13,7 @@ export class ComponentsSlider implements OnInit {
 
     $(function(){
 
-      $("#slider-1").ionRangeSlider({
+      $('#slider-1').ionRangeSlider({
         min: 0,
         max: 100,
         from: 50,
@@ -22,11 +22,11 @@ export class ComponentsSlider implements OnInit {
         grid_num: 10
       });
 
-      $("#slider-2").ionRangeSlider();
+      $('#slider-2').ionRangeSlider();
 
 
-      $("#slider-3").ionRangeSlider({
-        type: "double",
+      $('#slider-3').ionRangeSlider({
+        type: 'double',
         min: 0,
         max: 100,
         from: 20,
@@ -41,7 +41,7 @@ export class ComponentsSlider implements OnInit {
         grid_num: 10
       });
 
-      $("#slider-4").ionRangeSlider({
+      $('#slider-4').ionRangeSlider({
         from: 30,
         to: 60,
         type: 'double'

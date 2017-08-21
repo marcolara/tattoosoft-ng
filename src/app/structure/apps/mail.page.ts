@@ -31,12 +31,12 @@ export class AppsMail implements OnInit {
       // DATATABLES
       $('#example1').DataTable({
         responsive: true,
-        "order": [],
-        "columnDefs": [ {
-          "targets"  : 'no-sort',
-          "orderable": false
+        'order': [],
+        'columnDefs': [ {
+          'targets'  : 'no-sort',
+          'orderable': false
         }],
-        "lengthMenu": [[20, 50, 100, -1], [20, 50, 100, "All"]]
+        'lengthMenu': [[20, 50, 100, -1], [20, 50, 100, 'All']]
       });
 
     });

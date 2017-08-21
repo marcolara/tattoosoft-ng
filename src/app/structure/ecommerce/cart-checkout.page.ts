@@ -12,9 +12,9 @@ export class EcommerceCartCheckout implements OnInit {
 
     $(function() {
 
-      $("#cart-checkout").steps({
-        headerTag: "h3",
-        bodyTag: "section",
+      $('#cart-checkout').steps({
+        headerTag: 'h3',
+        bodyTag: 'section',
         transitionEffect: 0,
         autoFocus: true
       });

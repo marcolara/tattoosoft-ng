@@ -17,10 +17,10 @@ export class ComponentsDatePicker implements OnInit {
           horizontal: 'left'
         },
         icons: {
-          time: "fa fa-clock-o",
-          date: "fa fa-calendar",
-          up: "fa fa-arrow-up",
-          down: "fa fa-arrow-down",
+          time: 'fa fa-clock-o',
+          date: 'fa fa-calendar',
+          up: 'fa fa-arrow-up',
+          down: 'fa fa-arrow-down',
           previous: 'fa fa-arrow-left',
           next: 'fa fa-arrow-right'
         }
@@ -31,10 +31,10 @@ export class ComponentsDatePicker implements OnInit {
           horizontal: 'left'
         },
         icons: {
-          time: "fa fa-clock-o",
-          date: "fa fa-calendar",
-          up: "fa fa-arrow-up",
-          down: "fa fa-arrow-down",
+          time: 'fa fa-clock-o',
+          date: 'fa fa-calendar',
+          up: 'fa fa-arrow-up',
+          down: 'fa fa-arrow-down',
           previous: 'fa fa-arrow-left',
           next: 'fa fa-arrow-right'
         },
@@ -46,10 +46,10 @@ export class ComponentsDatePicker implements OnInit {
           horizontal: 'left'
         },
         icons: {
-          time: "fa fa-clock-o",
-          date: "fa fa-calendar",
-          up: "fa fa-arrow-up",
-          down: "fa fa-arrow-down",
+          time: 'fa fa-clock-o',
+          date: 'fa fa-calendar',
+          up: 'fa fa-arrow-up',
+          down: 'fa fa-arrow-down',
           previous: 'fa fa-arrow-left',
           next: 'fa fa-arrow-right'
         },
@@ -58,10 +58,10 @@ export class ComponentsDatePicker implements OnInit {
 
       $('.datepicker-inline-init').datetimepicker({
         icons: {
-          time: "fa fa-clock-o",
-          date: "fa fa-calendar",
-          up: "fa fa-arrow-up",
-          down: "fa fa-arrow-down",
+          time: 'fa fa-clock-o',
+          date: 'fa fa-calendar',
+          up: 'fa fa-arrow-up',
+          down: 'fa fa-arrow-down',
           previous: 'fa fa-arrow-left',
           next: 'fa fa-arrow-right'
         },
@@ -71,10 +71,10 @@ export class ComponentsDatePicker implements OnInit {
 
       $('.timepicker-inline-init').datetimepicker({
         icons: {
-          time: "fa fa-clock-o",
-          date: "fa fa-calendar",
-          up: "fa fa-arrow-up",
-          down: "fa fa-arrow-down",
+          time: 'fa fa-clock-o',
+          date: 'fa fa-calendar',
+          up: 'fa fa-arrow-up',
+          down: 'fa fa-arrow-down',
           previous: 'fa fa-arrow-left',
           next: 'fa fa-arrow-right'
         },

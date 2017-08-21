@@ -12,12 +12,12 @@ export class ComponentsTooltipsPopovers implements OnInit {
 
     $(function () {
 
-      $("[data-toggle=popover]").popover();
-      $("[data-toggle=popover-hover]").popover({
+      $('[data-toggle=popover]').popover();
+      $('[data-toggle=popover-hover]').popover({
         trigger: 'hover'
       });
 
-      $("[data-toggle=tooltip]").tooltip();
+      $('[data-toggle=tooltip]').tooltip();
 
     });
 

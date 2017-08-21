@@ -19,17 +19,17 @@ export class ChartsPeity implements OnInit {
         color3: '#c6eafd'
       };
 
-      $('[data-plugin=peityPie][data-color=blue]').peity("pie", {
+      $('[data-plugin=peityPie][data-color=blue]').peity('pie', {
         fill: [blue.color1, blue.color2, blue.color3],
         radius: 11
       });
 
-      $('[data-plugin=peityDonut][data-color=blue]').peity("donut", {
+      $('[data-plugin=peityDonut][data-color=blue]').peity('donut', {
         fill: [blue.color1, blue.color2, blue.color3],
         radius: 11
       });
 
-      $('[data-plugin=peityLine][data-color=blue]').peity("line", {
+      $('[data-plugin=peityLine][data-color=blue]').peity('line', {
         fill: [blue.color2],
         stroke: blue.color1,
         height: 22,
@@ -37,7 +37,7 @@ export class ChartsPeity implements OnInit {
         width: 44
       });
 
-      $('[data-plugin=peityBar][data-color=blue]').peity("bar", {
+      $('[data-plugin=peityBar][data-color=blue]').peity('bar', {
         fill: [blue.color1],
         height: 22,
         width: 44
@@ -52,17 +52,17 @@ export class ChartsPeity implements OnInit {
         color3: '#b1f8d9'
       };
 
-      $('[data-plugin=peityPie][data-color=green]').peity("pie", {
+      $('[data-plugin=peityPie][data-color=green]').peity('pie', {
         fill: [green.color1, green.color2, green.color3],
         radius: 11
       });
 
-      $('[data-plugin=peityDonut][data-color=green]').peity("donut", {
+      $('[data-plugin=peityDonut][data-color=green]').peity('donut', {
         fill: [green.color1, green.color2, green.color3],
         radius: 11
       });
 
-      $('[data-plugin=peityLine][data-color=green]').peity("line", {
+      $('[data-plugin=peityLine][data-color=green]').peity('line', {
         fill: [green.color2],
         stroke: green.color1,
         height: 22,
@@ -70,7 +70,7 @@ export class ChartsPeity implements OnInit {
         width: 44
       });
 
-      $('[data-plugin=peityBar][data-color=green]').peity("bar", {
+      $('[data-plugin=peityBar][data-color=green]').peity('bar', {
         fill: [green.color1],
         height: 22,
         width: 44
@@ -80,7 +80,7 @@ export class ChartsPeity implements OnInit {
 
       // UPDATE BLUE PEITY
 
-      var example11 = $("#example11").peity("line", {
+      var example11 = $('#example11').peity('line', {
         fill: [blue.color2],
         stroke: blue.color1,
         height: 22,
@@ -90,13 +90,13 @@ export class ChartsPeity implements OnInit {
 
       setInterval(function() {
         var random = Math.round(Math.random() * 10);
-        var values = example11.text().split(",");
+        var values = example11.text().split(',');
         values.shift();
         values.push(random);
-        example11.text(values.join(",")).change()
+        example11.text(values.join(',')).change()
       }, 1000);
 
-      var example12 = $("#example12").peity("bar", {
+      var example12 = $('#example12').peity('bar', {
         fill: [blue.color1],
         height: 22,
         width: 44
@@ -104,17 +104,17 @@ export class ChartsPeity implements OnInit {
 
       setInterval(function() {
         var random = Math.round(Math.random() * 10);
-        var values = example12.text().split(",");
+        var values = example12.text().split(',');
         values.shift();
         values.push(random);
-        example12.text(values.join(",")).change()
+        example12.text(values.join(',')).change()
       }, 1000);
 
 
 
       // UPDATE GREEN PEITY
 
-      var example21 = $("#example21").peity("line", {
+      var example21 = $('#example21').peity('line', {
         fill: [green.color2],
         stroke: green.color1,
         height: 22,
@@ -124,13 +124,13 @@ export class ChartsPeity implements OnInit {
 
       setInterval(function() {
         var random = Math.round(Math.random() * 10);
-        var values = example21.text().split(",");
+        var values = example21.text().split(',');
         values.shift();
         values.push(random);
-        example21.text(values.join(",")).change()
+        example21.text(values.join(',')).change()
       }, 1000);
 
-      var example22 = $("#example22").peity("bar", {
+      var example22 = $('#example22').peity('bar', {
         fill: [green.color1],
         height: 22,
         width: 44
@@ -138,10 +138,10 @@ export class ChartsPeity implements OnInit {
 
       setInterval(function() {
         var random = Math.round(Math.random() * 10);
-        var values = example22.text().split(",");
+        var values = example22.text().split(',');
         values.shift();
         values.push(random);
-        example22.text(values.join(",")).change()
+        example22.text(values.join(',')).change()
       }, 1000);
 
     });
