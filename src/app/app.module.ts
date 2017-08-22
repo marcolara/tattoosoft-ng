@@ -1,19 +1,19 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { Router, NavigationStart, NavigationEnd, RouterModule } from '@angular/router';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {HttpModule} from '@angular/http';
+import {Router, NavigationStart, NavigationEnd, RouterModule} from '@angular/router';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
-import { routing } from './app.routing';
+import {routing} from './app.routing';
 
-import { AppComponent } from './app.component';
-import { TopBarComponent } from './components/top-bar/top-bar.component';
-import { MenuLeftComponent } from './components/menu-left/menu-left.component';
-import { MenuRightComponent } from './components/menu-right/menu-right.component';
-import { FooterComponent } from './components/footer/footer.component';
+import {AppComponent} from './app.component';
+import {TopBarComponent} from './components/top-bar/top-bar.component';
+import {MenuLeftComponent} from './components/menu-left/menu-left.component';
+import {MenuRightComponent} from './components/menu-right/menu-right.component';
+import {FooterComponent} from './components/footer/footer.component';
 
-import { StructureModule } from './structure/structure.module';
+import {StructureModule} from './structure/structure.module';
 
 declare var NProgress: any;
 
