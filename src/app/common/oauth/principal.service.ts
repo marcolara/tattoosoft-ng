@@ -46,7 +46,7 @@ export class PrincipalService {
     }
     return false;
   }
-  public obtainAccessToken(credentials: LoginCredentials): Promise<any>{
+  public obtainAccessToken(credentials: LoginCredentials): Promise<any> {
     this.clearAccessCookie();
     credentials.grant_type = 'password';
     credentials.client_id = 'fooClientIdPassword';

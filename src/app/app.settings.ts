@@ -12,7 +12,7 @@ export class AppSettings {
   public static REQUEST = {
     host: 'localhost:8084',
     options: new RequestOptions({headers: new Headers({
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json; charset=utf-8',
       'Accept': 'q=0.8;application/json;q=0.9'
     })})
   };

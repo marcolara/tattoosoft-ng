@@ -33,14 +33,14 @@
                         </h4>
                         <br />
                         {{diagnostic}}
-                        <form method="POST" (ngSubmit)="login($event, email.value, password.value)" #loginForm="ngForm">
+                        <form method="POST" (ngSubmit)="login($event, username.value, password.value)" #loginForm="ngForm">
                             <div class="form-group">
                                 <label class="form-label">Username</label>
-                                <input #email id="email"
+                                <input #username id="username"
                                        class="form-control"
                                        placeholder="Email"
-                                       name="email"
-                                       type="text" [(ngModel)]="model.email">
+                                       name="username"
+                                       type="text" [(ngModel)]="model.username">
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Password</label>
