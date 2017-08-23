@@ -1,7 +1,7 @@
 export class Identity {
   authorities: string[];
   user: any
-  constructor(user : any, authorities: string[]) {
+  constructor(user: any, authorities: string[]) {
     this.user = user;
     this.authorities = authorities;
   }

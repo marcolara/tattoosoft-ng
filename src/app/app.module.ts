@@ -8,6 +8,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {routing} from './app.routing';
 
 import {AppComponent} from './app.component';
+import {AuthGuard} from './common/auth.guard';
 import {TopBarComponent} from './components/top-bar/top-bar.component';
 import {MenuLeftComponent} from './components/menu-left/menu-left.component';
 import {MenuRightComponent} from './components/menu-right/menu-right.component';
@@ -15,6 +16,7 @@ import {FooterComponent} from './components/footer/footer.component';
 
 import {StructureModule} from './structure/structure.module';
 import {CookieService} from 'angular2-cookie/services/cookies.service';
+import {PrincipalService} from './common/oauth/principal.service';
 
 declare var NProgress: any;
 
@@ -35,7 +37,7 @@ declare var NProgress: any;
     NgbModule.forRoot(),
     routing
   ],
-  providers: [CookieService],
+  providers: [CookieService, PrincipalService, AuthGuard],
   bootstrap: [AppComponent]
 })
 

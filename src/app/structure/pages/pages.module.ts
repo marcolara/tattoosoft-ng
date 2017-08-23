@@ -10,6 +10,7 @@ import { PagesPage404 } from './page-404.page';
 import { PagesPage500 } from './page-500.page';
 import { PagesPricingTables } from './pricing-tables.page';
 import { PagesRegister } from './register.page';
+import { FormsModule } from '@angular/forms';
 
 export const routes: Routes = [
   { path: 'pages/invoice', component: PagesInvoice },
@@ -25,7 +26,8 @@ export const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    FormsModule
   ],
   declarations: [
     PagesInvoice,

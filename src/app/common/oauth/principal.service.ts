@@ -3,40 +3,28 @@ import {Http, Response, Headers, RequestOptions, URLSearchParams} from '@angular
 import 'rxjs/add/operator/toPromise';
 import {AppSettings} from '../../app.settings';
 import {Identity} from './identity';
-import {Credentials} from './credentials';
+import {LoginCredentials} from './login-credentials';
 import {CookieService} from 'angular2-cookie/core';
 import {CookieOptionsArgs} from 'angular2-cookie/services/cookie-options-args.model';
 
-
 @Injectable()
 export class PrincipalService {
-  _identity: Identity;
-  _authenticated: boolean;
-  _grantType: string;
-  _clientId: string;
-  headers: Headers;
-  options: RequestOptions;
-  service: {
-    host: 'localhost:8084',
-    headers: {
-      'Content-type': 'application/x-www-form-urlencoded; charset=utf-8'
-    },
-    refreshData: {
-      grant_type: 'refresh_token'
-    }
-  };
+  private _identity: Identity;
+  private _authenticated: boolean;
+  private _grantType: string;
+  private _clientId: string;
 
   constructor(private http: Http, private _cookieService: CookieService) {
-
+    this._authenticated = false;
   }
 
-  isIdentityResolved(): boolean {
+  public isIdentityResolved(): boolean {
     return this._identity.hasAuthorities();
   }
-  isAuthenticated(): boolean {
+  public isAuthenticated(): boolean {
     return this._authenticated;
   }
-  isInRole(role: string): boolean {
+  public isInRole(role: string): boolean {
     if (!this._authenticated || this._identity.hasAuthorities()) {
       return false;
     }
@@ -47,7 +35,7 @@ export class PrincipalService {
     }
     return false;
   }
-  isInAnyRole(authorities: string[]): boolean {
+  public isInAnyRole(authorities: string[]): boolean {
     if (!this._authenticated || this._identity.hasAuthorities()) {
       return false;
     }
@@ -58,25 +46,23 @@ export class PrincipalService {
     }
     return false;
   }
-  authenticate(credentials: any): Promise<any> {
+  public obtainAccessToken(credentials: LoginCredentials): Promise<any>{
     this.clearAccessCookie();
-    return this.obtainAccessToken(credentials)
+    credentials.grant_type = 'password';
+    credentials.client_id = 'fooClientIdPassword';
+    return this.http.post(AppSettings.API_ENDPOINTS.token, credentials, AppSettings.REQUEST.options)
+      .toPromise()
       .then((res: Response) => {
+        this.extractToken(res);
         this.identity(false).then(() => {
           if (this.isAuthenticated()) {
             return Promise.resolve(this._identity);
-          } else {
-            return Promise.reject(res);
           }
-        })
+        }).catch((data1) => {
+          this.handleError(data1);
+        });
       })
-      .catch(this.handleError);
-  }
-  obtainAccessToken(credentials: any): Promise<any> {
-    return this.http.post(AppSettings.API_ENDPOINTS.token, new Credentials(credentials.username, credentials.password), this.options)
-      .toPromise()
-      .then(this.extractToken)
-      .catch(this.handleError);
+      .catch(this.handleError.bind(this));
   }
   private identity(force: boolean): Promise<any> {
     if (force === true) {
@@ -85,34 +71,39 @@ export class PrincipalService {
     if (this._identity) {
       return Promise.resolve(this._identity);
     }
-    this.options.headers.append('Authorization', 'Bearer ' + this._cookieService.get("access_token"));
+    AppSettings.REQUEST.options.headers.append('Authorization', 'Bearer ' + this._cookieService.get('access_token'));
     this.http
-      .get(AppSettings.API_ENDPOINTS.identity, this.options)
+      .get(AppSettings.API_ENDPOINTS.identity, AppSettings.REQUEST.options)
       .toPromise()
-      .then(this.extractIdentity)
-      .catch(this.handleError);
+      .then((data) => {
+        this.extractIdentity(data);
+      })
+      .catch((data) => {
+        this.handleError(data);
+      });
   }
   private clearAccessCookie() {
     this._cookieService.remove('access_token');
     this._cookieService.remove('refreshToken');
   }
-  private extractToken(res: Response) {
+  private extractToken(res: Response): string {
     let body = res.json();
     let opts: CookieOptionsArgs = {
       expires: new Date(new Date().getTime() + (1000 * body.data.expires_in))
     };
     this._cookieService.put('access_token', body.data.access_token, opts);
+    return body.data.access_token || '';
   }
-  private extractIdentity(res: Response): Promise<any> {
+  private extractIdentity(res: Response): Identity {
     let body = res.json();
     this._identity = new Identity(body.user, body.user.authorities);
     this._authenticated = true;
-    return Promise.resolve(this._identity);
+    return this._identity;
   }
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error);
+  private handleError(error: Response | any): Promise<any> {
     this._authenticated = false;
     this.clearAccessCookie();
+    console.error(error.message || error);
     return Promise.reject(error.message || error);
   }
 }

@@ -1,5 +1,5 @@
 <!-- START: pages/login-beta -->
-<div class="cat__pages__login" style="background-image: url(assets/modules/pages/common/img/login/1.jpg)">
+<div class="cat__pages__login--fullscreen" style="background-image: url(assets/modules/pages/common/img/login/1.jpg)">
     <div class="cat__pages__login__header">
         <div class="row">
             <div class="col-lg-8">
@@ -32,24 +32,24 @@
                             <strong>Please log in</strong>
                         </h4>
                         <br />
-                        <form id="form-validation" name="form-validation" method="POST">
+                        {{diagnostic}}
+                        <form method="POST" (ngSubmit)="login($event, email.value, password.value)" #loginForm="ngForm">
                             <div class="form-group">
                                 <label class="form-label">Username</label>
-                                <input id="validation-email"
+                                <input #email id="email"
                                        class="form-control"
-                                       placeholder="Email or Username"
-                                       name="validation[email]"
-                                       type="text"
-                                       data-validation="[EMAIL]">
+                                       placeholder="Email"
+                                       name="email"
+                                       type="text" [(ngModel)]="model.email">
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Password</label>
-                                <input id="validation-password"
+                                <input #password id="password"
                                        class="form-control password"
-                                       name="validation[password]"
+                                       name="password"
                                        type="password" data-validation="[L>=6]"
                                        data-validation-message="$ must be at least 6 characters"
-                                       placeholder="Password">
+                                       placeholder="Password"  [(ngModel)]="model.password">
                             </div>
                             <div class="form-group">
                                 <a href="javascript: void(0);" class="pull-right cat__core__link--blue cat__core__link--underlined">Forgot Password?</a>

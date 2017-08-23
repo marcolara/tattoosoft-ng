@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 declare var $: any;
 declare var jQuery: any;
 declare var autosize: any;
@@ -12,8 +12,7 @@ declare var Chartist: any;
 
 export class DashboardsBeta implements OnInit {
   ngOnInit() {
-
-    $( function() {
+    $(function() {
 
       ///////////////////////////////////////////////////////////
       // tooltips
@@ -29,24 +28,24 @@ export class DashboardsBeta implements OnInit {
           [1, 3, 4, 5, 6]
         ]
       }, {
-        fullWidth: !0,
-        chartPadding: {
-          right: 40
-        },
-        plugins: [
-          Chartist.plugins.tooltip()
-        ]
-      });
+          fullWidth: !0,
+          chartPadding: {
+            right: 40
+          },
+          plugins: [
+            Chartist.plugins.tooltip()
+          ]
+        });
 
       ///////////////////////////////////////////////////////////
       // chart 2
       var overlappingData = {
-          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-          series: [
-            [5, 4, 3, 7, 5, 10, 3, 4, 8, 10, 6, 8],
-            [3, 2, 9, 5, 4, 6, 4, 6, 7, 8, 7, 4]
-          ]
-        },
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        series: [
+          [5, 4, 3, 7, 5, 10, 3, 4, 8, 10, 6, 8],
+          [3, 2, 9, 5, 4, 6, 4, 6, 7, 8, 7, 4]
+        ]
+      },
         overlappingOptions = {
           seriesBarDistance: 10,
           plugins: [
@@ -88,7 +87,7 @@ export class DashboardsBeta implements OnInit {
         });
       }
 
-    } );
+    });
 
   }
 }

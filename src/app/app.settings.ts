@@ -16,7 +16,7 @@ export class AppSettings {
       'Accept': 'q=0.8;application/json;q=0.9'
     })})
   };
-  
+
   public static API_ENDPOINTS = {
     identity: '//' + AppSettings.REQUEST.host + '/tattoosoft-oauth-resource/users/extra',
     token: '//' + AppSettings.REQUEST.host + '/oauth/token'

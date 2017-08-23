@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Identity } from '../../common/oauth/identity';
+import {LoginCredentials} from '../../common/oauth/login-credentials';
+import {PrincipalService} from '../../common/oauth/principal.service';
+import {Component, OnInit} from '@angular/core';
 declare var $: any;
 declare var jQuery: any;
 
@@ -8,6 +11,12 @@ declare var jQuery: any;
 })
 
 export class PagesLoginBeta implements OnInit {
+  model = new LoginCredentials('','');
+  
+  constructor(private _principal: PrincipalService) {
+
+  }
+
   ngOnInit() {
 
     $(function() {
@@ -31,12 +40,12 @@ export class PagesLoginBeta implements OnInit {
       });
 
       // Switch to fullscreen
-      $('.switch-to-fullscreen').on('click', function () {
+      $('.switch-to-fullscreen').on('click', function() {
         $('.cat__pages__login').toggleClass('cat__pages__login--fullscreen');
       })
 
       // Change BG
-      $('.random-bg-image').on('click', function () {
+      $('.random-bg-image').on('click', function() {
         var min = 1, max = 5,
           next = Math.floor($('.random-bg-image').data('img')) + 1,
           final = next > max ? min : next;
@@ -48,5 +57,15 @@ export class PagesLoginBeta implements OnInit {
     });
 
   }
+  login(event: any, username: string, password: string) {
+    event.preventDefault();
+    this._principal.obtainAccessToken(new LoginCredentials(username, password)).then((identity: Identity) => {
+      console.log(identity);
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+  
+  get diagnostic() { return JSON.stringify(this.model); }
 }
 
