@@ -14,6 +14,7 @@ import {MenuRightComponent} from './components/menu-right/menu-right.component';
 import {FooterComponent} from './components/footer/footer.component';
 
 import {StructureModule} from './structure/structure.module';
+import {CookieService} from 'angular2-cookie/services/cookies.service';
 
 declare var NProgress: any;
 
@@ -34,7 +35,7 @@ declare var NProgress: any;
     NgbModule.forRoot(),
     routing
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 

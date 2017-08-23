@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "latest",
     "@angular/router": "latest",
     "@ng-bootstrap/ng-bootstrap": "latest",
+    "angular2-cookie": "^1.2.6",
     "core-js": "latest",
     "npm": "^5.0.4",
     "rxjs": "latest",
