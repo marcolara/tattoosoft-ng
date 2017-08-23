@@ -11,14 +11,21 @@ export class AppSettings {
 
   public static REQUEST = {
     host: 'localhost:8084',
-    options: new RequestOptions({headers: new Headers({
-      'Content-Type': 'application/json; charset=utf-8',
-      'Accept': 'q=0.8;application/json;q=0.9'
-    })})
+    json_options: new RequestOptions({
+      headers: new Headers({
+        'Content-Type': 'application/json; charset=utf-8',
+        'Accept': 'q=0.8;application/json;q=0.9'
+      })
+    }),
+    form_options: new RequestOptions({
+      headers: new Headers({
+        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+      })
+    })
   };
 
   public static API_ENDPOINTS = {
-    identity: '//' + AppSettings.REQUEST.host + '/tattoosoft-oauth-resource/users/extra',
+    identity: '//' + AppSettings.REQUEST.host + '/tattoosoft-oauth-resource/user/extra',
     token: '//' + AppSettings.REQUEST.host + '/oauth/token'
   };
 }

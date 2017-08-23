@@ -59,7 +59,7 @@ export class PagesLoginBeta implements OnInit {
   }
   login(event: any, username: string, password: string) {
     event.preventDefault();
-    this._principal.obtainAccessToken(new LoginCredentials(username, password)).then((identity: Identity) => {
+    this._principal.obtainAccessToken(new LoginCredentials(username, password, 'password', 'fooClientIdPassword')).then((identity: Identity) => {
       console.log(identity);
     }).catch((error) => {
       console.log(error);
