@@ -1,7 +1,9 @@
-import { Identity } from '../../common/oauth/identity';
+import {Identity} from '../../common/oauth/identity';
 import {LoginCredentials} from '../../common/oauth/login-credentials';
 import {PrincipalService} from '../../common/oauth/principal.service';
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
+import {FormGroup} from '@angular/forms';
+import {Router} from '@angular/router';
 declare var $: any;
 declare var jQuery: any;
 
@@ -11,61 +13,39 @@ declare var jQuery: any;
 })
 
 export class PagesLoginBeta implements OnInit {
-  model = new LoginCredentials('','');
-  
-  constructor(private _principal: PrincipalService) {
+  model: LoginCredentials;
+  globalErrors: string[];
 
+  constructor(private _principal: PrincipalService, private router: Router) {
+    this.model = new LoginCredentials('', '', 'password', 'fooClientIdPassword');
+    this.globalErrors = [];
+    this._principal.errorHandled$.subscribe(value => {
+      console.log('subscribe' + value);
+      this.globalErrors.push('error connection.')
+    });
   }
 
   ngOnInit() {
-
     $(function() {
-
-      // Form Validation
-      $('#form-validation').validate({
-        submit: {
-          settings: {
-            inputContainer: '.form-group',
-            errorListClass: 'form-control-error',
-            errorClass: 'has-danger'
-          }
-        }
-      });
-
       // Show/Hide Password
       $('.password').password({
         eyeClass: '',
         eyeOpenClass: 'icmn-eye',
         eyeCloseClass: 'icmn-eye-blocked'
       });
-
-      // Switch to fullscreen
-      $('.switch-to-fullscreen').on('click', function() {
-        $('.cat__pages__login').toggleClass('cat__pages__login--fullscreen');
-      })
-
-      // Change BG
-      $('.random-bg-image').on('click', function() {
-        var min = 1, max = 5,
-          next = Math.floor($('.random-bg-image').data('img')) + 1,
-          final = next > max ? min : next;
-
-        $('.random-bg-image').data('img', final);
-        $('.cat__pages__login').data('img', final).css('backgroundImage', 'url(assets/modules/pages/common/img/login/' + final + '.jpg)');
-      })
-
     });
-
   }
-  login(event: any, username: string, password: string) {
+  login(event: any) {
     event.preventDefault();
-    this._principal.obtainAccessToken(new LoginCredentials(username, password, 'password', 'fooClientIdPassword')).then((identity: Identity) => {
-      console.log(identity);
-    }).catch((error) => {
-      console.log(error);
+    this.clearErrors();
+    this._principal.obtainAccessToken(this.model).then((identity: Identity) => {
+      this.router.navigateByUrl('/');
+    }).catch((response: Response) => {
+      
     });
   }
-  
-  get diagnostic() { return JSON.stringify(this.model); }
+  clearErrors(): void {
+    this.globalErrors = [];
+  }
 }
 

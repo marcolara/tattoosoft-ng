@@ -10,11 +10,12 @@ export class AppSettings {
   };
 
   public static REQUEST = {
-    host: 'localhost:8084',
+    web_host: 'localhost:8084',
+    resource_host: 'localhost:8082',
     json_options: new RequestOptions({
       headers: new Headers({
         'Content-Type': 'application/json; charset=utf-8',
-        'Accept': 'q=0.8;application/json;q=0.9'
+        'Accept': 'application/json, text/plain, */*'
       })
     }),
     form_options: new RequestOptions({
@@ -25,7 +26,7 @@ export class AppSettings {
   };
 
   public static API_ENDPOINTS = {
-    identity: '//' + AppSettings.REQUEST.host + '/tattoosoft-oauth-resource/user/extra',
-    token: '//' + AppSettings.REQUEST.host + '/oauth/token'
+    identity: '//' + AppSettings.REQUEST.resource_host + '/tattoosoft-oauth-resource/user/extra',
+    token: '//' + AppSettings.REQUEST.web_host + '/oauth/token'
   };
 }

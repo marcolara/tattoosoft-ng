@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, Output, EventEmitter} from '@angular/core';
 import {Http, Response, Headers, RequestOptions, URLSearchParams} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import {AppSettings} from '../../app.settings';
@@ -14,6 +14,8 @@ export class PrincipalService {
   private _authenticated: boolean;
   private _grantType: string;
   private _clientId: string;
+
+  @Output() errorHandled$ = new EventEmitter();
 
   constructor(private http: Http, private _cookieService: CookieService) {
     this._authenticated = false;
@@ -104,14 +106,23 @@ export class PrincipalService {
   }
   private extractIdentity(res: Response): Identity {
     let body = res.json();
-    this._identity = new Identity(body.user, body.user.authorities);
+    this._identity = new Identity(body.dataMap.user, body.dataMap.user.authorities);
     this._authenticated = true;
     return this._identity;
   }
-  private handleError(error: Response | any): Promise<any> {
+  private handleError(response: Response | any): Promise<any> {
     this._authenticated = false;
     this.clearAccessCookie();
-    return Promise.reject(error.message || error);
+    this.errorHandler(response);
+    return Promise.reject(response.message || response);
+  }
+  private errorHandler(response: Response): any {
+    if (response.status == 0) {
+      this.errorHandled$.emit({
+        value: "ERR_CONNECTION_REFUSED"
+      });
+    }
+    return null;
   }
 }
 
