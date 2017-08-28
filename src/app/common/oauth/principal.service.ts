@@ -113,10 +113,16 @@ export class PrincipalService {
   private handleError(response: Response | any): Promise<any> {
     this._authenticated = false;
     this.clearAccessCookie();
-    if (response.status == 0) {
-      this.errorHandled$.emit({
-        value: "ERR_CONNECTION_REFUSED"
-      });
+    switch(response.status) {
+      case 0:
+        this.errorHandled$.emit({
+          value: "ERR_CONNECTION_REFUSED"
+        });
+      case 500:
+         this.errorHandled$.emit({
+          value: "ERR_FATAL"
+        });
+      default:
     }
     return Promise.reject(response.message || response);
   }
