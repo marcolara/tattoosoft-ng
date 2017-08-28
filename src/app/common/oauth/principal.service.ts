@@ -14,6 +14,7 @@ export class PrincipalService {
   private _authenticated: boolean;
   private _grantType: string;
   private _clientId: string;
+  public redirectUrl: string;
 
   @Output() errorHandled$ = new EventEmitter();
 
@@ -73,23 +74,22 @@ export class PrincipalService {
       })
       .catch(this.handleError.bind(this));
   }
-  private identity(force: boolean): Promise<any> {
+  public identity(force?: boolean): Promise<any> {
     if (force === true) {
       this._identity = null;
     }
     if (this._identity) {
       return Promise.resolve(this._identity);
     }
-    AppSettings.REQUEST.json_options.headers.append('Authorization', 'Bearer ' + this._cookieService.get('access_token'));
+    AppSettings.REQUEST.json_options.headers.set('Authorization', 'Bearer ' + this._cookieService.get('access_token'));
     return this.http
       .get(AppSettings.API_ENDPOINTS.identity, AppSettings.REQUEST.json_options)
       .toPromise()
       .then((res: Response) => {
-        this.extractIdentity(res);
-        return Promise.resolve(this._identity);
+        return Promise.resolve(this.extractIdentity(res));
       })
       .catch((res: Response) => {
-        this.handleError(res);
+        return this.handleError(res);
       });
   }
   private clearAccessCookie() {
@@ -113,16 +113,12 @@ export class PrincipalService {
   private handleError(response: Response | any): Promise<any> {
     this._authenticated = false;
     this.clearAccessCookie();
-    this.errorHandler(response);
-    return Promise.reject(response.message || response);
-  }
-  private errorHandler(response: Response): any {
     if (response.status == 0) {
       this.errorHandled$.emit({
         value: "ERR_CONNECTION_REFUSED"
       });
     }
-    return null;
+    return Promise.reject(response.message || response);
   }
 }
 

@@ -20,7 +20,6 @@ export class PagesLoginBeta implements OnInit {
     this.model = new LoginCredentials('', '', 'password', 'fooClientIdPassword');
     this.globalErrors = [];
     this._principal.errorHandled$.subscribe(value => {
-      console.log('subscribe' + value);
       this.globalErrors.push('error connection.')
     });
   }
@@ -39,7 +38,7 @@ export class PagesLoginBeta implements OnInit {
     event.preventDefault();
     this.clearErrors();
     this._principal.obtainAccessToken(this.model).then((identity: Identity) => {
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl(this._principal.redirectUrl ? this._principal.redirectUrl : '/');
     }).catch((response: Response) => {
       
     });

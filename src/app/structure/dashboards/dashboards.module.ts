@@ -7,7 +7,7 @@ import { DashboardsAlpha } from './alpha.page';
 import { DashboardsBeta } from './beta.page';
 
 export const routes: Routes = [
-  { path: 'dashboards/alpha', component: DashboardsAlpha, canActivate: [AuthGuard] },
+  { path: 'dashboards/alpha', data: { roles: ["SUPER_ADMIN"] }, component: DashboardsAlpha, canActivate: [AuthGuard] },
   { path: 'dashboards/beta', component: DashboardsBeta },
 ];
 
