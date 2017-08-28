@@ -29,18 +29,18 @@ export class PrincipalService {
     return this._authenticated;
   }
   public isInRole(role: string): boolean {
-    if (!this._authenticated || this.isIdentityResolved()) {
+    if (!this._authenticated || !this.isIdentityResolved()) {
       return false;
     }
-    for (let i = 0; i < (!this._identity ? this._identity.getAuthorities().length : 0); i++) {
-      if (this._identity.getAuthorities()[i] === role || role === AppSettings.USER_ROLES.all) {
+    for (let i = 0; i < this._identity.getAuthorities().length; i++) {
+      if (this._identity.getAuthorities()[i]['authority'] === role || role === AppSettings.USER_ROLES.all) {
         return true;
       }
     }
     return false;
   }
   public isInAnyRole(authorities: string[]): boolean {
-    if (!this._authenticated || this._identity.hasAuthorities()) {
+    if (!this._authenticated || !this._identity.hasAuthorities()) {
       return false;
     }
     for (let i = 0; i < authorities.length; i++) {

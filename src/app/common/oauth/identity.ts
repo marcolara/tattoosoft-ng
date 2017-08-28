@@ -12,7 +12,7 @@ export class Identity {
     this.authorities = authorities;
   }
   getAuthorities() {
-    return this.authorities;
+    return this.authorities.length > 0 ? this.authorities : [];
   }
   hasAuthorities(): boolean {
     return this.authorities.length > 0;
