@@ -5,7 +5,7 @@ import { Routes, RouterModule }  from '@angular/router';
 import { PagesInvoice } from './invoice.page';
 import { PagesLockscreen } from './lockscreen.page';
 import { PagesLoginAlpha } from './login-alpha.page';
-import { PagesLoginBeta } from './login-beta.page';
+import { PagesLogin } from './login.page';
 import { PagesPage404 } from './page-404.page';
 import { PagesPage500 } from './page-500.page';
 import { PagesPricingTables } from './pricing-tables.page';
@@ -16,7 +16,7 @@ export const routes: Routes = [
   { path: 'pages/invoice', component: PagesInvoice },
   { path: 'pages/lockscreen', component: PagesLockscreen },
   { path: 'pages/login-alpha', component: PagesLoginAlpha },
-  { path: 'pages/login-beta', component: PagesLoginBeta },
+  { path: 'pages/login', component: PagesLogin },
   { path: 'pages/page-404', component: PagesPage404 },
   { path: 'pages/page-500', component: PagesPage500 },
   { path: 'pages/pricing-tables', component: PagesPricingTables },
@@ -33,7 +33,7 @@ export const routes: Routes = [
     PagesInvoice,
     PagesLockscreen,
     PagesLoginAlpha,
-    PagesLoginBeta,
+    PagesLogin,
     PagesPage404,
     PagesPage500,
     PagesPricingTables,

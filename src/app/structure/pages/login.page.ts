@@ -9,10 +9,10 @@ declare var jQuery: any;
 
 @Component({
   selector: 'cat-page',
-  templateUrl: './login-beta.html'
+  templateUrl: './login.html'
 })
 
-export class PagesLoginBeta implements OnInit {
+export class PagesLogin implements OnInit {
   model: LoginCredentials;
   globalErrors: string[];
 
@@ -20,7 +20,7 @@ export class PagesLoginBeta implements OnInit {
     this.model = new LoginCredentials('', '', 'password', 'fooClientIdPassword');
     this.globalErrors = [];
     this._principal.errorHandled$.subscribe(value => {
-      this.globalErrors.push('error connection.')
+      this.globalErrors.push('error connection.');
     });
   }
 
@@ -40,7 +40,6 @@ export class PagesLoginBeta implements OnInit {
     this._principal.obtainAccessToken(this.model).then((identity: Identity) => {
       this.router.navigateByUrl(this._principal.redirectUrl ? this._principal.redirectUrl : '/');
     }).catch((response: Response) => {
-      
     });
   }
   clearErrors(): void {

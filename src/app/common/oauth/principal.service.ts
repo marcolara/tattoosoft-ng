@@ -51,7 +51,7 @@ export class PrincipalService {
     return false;
   }
   public obtainAccessToken(credentials: LoginCredentials): Promise<any> {
-    this.clearAccessCookie();
+    this.clearAccess();
     credentials.grant_type = 'password';
     credentials.client_id = 'fooClientIdPassword';
     let urlSearchParams = new URLSearchParams('', new GhQueryEncoder());
@@ -92,7 +92,9 @@ export class PrincipalService {
         return this.handleError(res);
       });
   }
-  private clearAccessCookie() {
+  public clearAccess() {
+    this._authenticated = false;
+    this._identity = null;
     this._cookieService.remove('access_token');
     this._cookieService.remove('refreshToken');
   }
@@ -111,8 +113,7 @@ export class PrincipalService {
     return this._identity;
   }
   private handleError(response: Response | any): Promise<any> {
-    this._authenticated = false;
-    this.clearAccessCookie();
+    this.clearAccess();
     switch(response.status) {
       case 0:
         this.errorHandled$.emit({

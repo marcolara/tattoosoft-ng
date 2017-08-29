@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Identity } from '../../common/oauth/identity';
+import {Component, OnInit} from '@angular/core';
 declare var $: any;
 declare var jQuery: any;
 declare var autosize: any;
@@ -11,23 +12,25 @@ declare var Chartist: any;
 })
 
 export class DashboardsAlpha implements OnInit {
+  identity: Identity;
+  
   ngOnInit() {
 
-    $( function() {
+    $(function() {
 
       ///////////////////////////////////////////////////////////
       // load flappy bird
-      $(function(){
+      $(function() {
 
         function loadGame() {
           $('#hidden-game').attr('src', $('#hidden-game').attr('load-src'));
         }
 
-        $('#duck-game .card-header').on('dblclick', function(){
+        $('#duck-game .card-header').on('dblclick', function() {
           loadGame();
         });
 
-        $('#duck-game .cat__core__sortable__uncollapse').on('click', function(){
+        $('#duck-game .cat__core__sortable__uncollapse').on('click', function() {
           loadGame();
         });
 
@@ -39,7 +42,7 @@ export class DashboardsAlpha implements OnInit {
 
       ///////////////////////////////////////////////////////////
       // jquery ui sortable
-      $('#left-col, #right-col, #bottom-col').each(function(){
+      $('#left-col, #right-col, #bottom-col').each(function() {
         $(this).sortable({
           // connect left and right containers
           connectWith: '.cat__core__sortable',
@@ -47,7 +50,7 @@ export class DashboardsAlpha implements OnInit {
           scroll: true,
 
           // set initial order from localStorage
-          create: function () {
+          create: function() {
 
             var that = $(this),
               id = $(this).attr('id'),
@@ -56,7 +59,7 @@ export class DashboardsAlpha implements OnInit {
             if (orderLs) {
               var order = orderLs.split(',');
 
-              $.each(order, function(key, val){
+              $.each(order, function(key, val) {
                 var el = $('[order-id=' + val + ']');
                 that.append(el);
               });
@@ -65,7 +68,7 @@ export class DashboardsAlpha implements OnInit {
           },
 
           // save order state on order update to localStorage
-          update: function () {
+          update: function() {
             var orderArray = $(this).sortable('toArray', {attribute: 'order-id'}),
               prefix = $(this).attr('id');
 
@@ -79,21 +82,21 @@ export class DashboardsAlpha implements OnInit {
 
       ///////////////////////////////////////////////////////////
       // reset dashboard
-      $('.reset-button').on('click', function(){
+      $('.reset-button').on('click', function() {
         localStorage.removeItem('order-left-col');
         localStorage.removeItem('order-right-col');
         localStorage.removeItem('order-bottom-col');
-        setTimeout(function () {
+        setTimeout(function() {
           location.reload();
         }, 500)
       });
 
       ///////////////////////////////////////////////////////////
       // card controls
-      $('.cat__core__sortable__collapse, .cat__core__sortable__uncollapse').on('click', function(){
+      $('.cat__core__sortable__collapse, .cat__core__sortable__uncollapse').on('click', function() {
         $(this).closest('.card').toggleClass('cat__core__sortable__collapsed');
       });
-      $('.cat__core__sortable__close').on('click', function(){
+      $('.cat__core__sortable__close').on('click', function() {
         $(this).closest('.card').remove();
         $('.tooltip').remove();
       });
@@ -171,7 +174,7 @@ export class DashboardsAlpha implements OnInit {
 
       ///////////////////////////////////////////////////////////
       // ladda buttons
-      Ladda.bind( '.ladda-button', { timeout: 2000 } );
+      Ladda.bind('.ladda-button', {timeout: 2000});
 
       ///////////////////////////////////////////////////////////
       // chart1
@@ -183,24 +186,24 @@ export class DashboardsAlpha implements OnInit {
           [1, 3, 4, 5, 6]
         ]
       }, {
-        fullWidth: !0,
-        chartPadding: {
-          right: 40
-        },
-        plugins: [
-          Chartist.plugins.tooltip()
-        ]
-      });
+          fullWidth: !0,
+          chartPadding: {
+            right: 40
+          },
+          plugins: [
+            Chartist.plugins.tooltip()
+          ]
+        });
 
       ///////////////////////////////////////////////////////////
       // chart 2
       var overlappingData = {
-          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-          series: [
-            [5, 4, 3, 7, 5, 10, 3, 4, 8, 10, 6, 8],
-            [3, 2, 9, 5, 4, 6, 4, 6, 7, 8, 7, 4]
-          ]
-        },
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        series: [
+          [5, 4, 3, 7, 5, 10, 3, 4, 8, 10, 6, 8],
+          [3, 2, 9, 5, 4, 6, 4, 6, 7, 8, 7, 4]
+        ]
+      },
         overlappingOptions = {
           seriesBarDistance: 10,
           plugins: [
@@ -274,7 +277,7 @@ export class DashboardsAlpha implements OnInit {
         grid_num: 10
       });
 
-    } );
+    });
 
   }
 }
