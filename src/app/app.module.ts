@@ -44,17 +44,14 @@ declare var NProgress: any;
 export class AppModule {
   constructor(private router: Router) {
     router.events.subscribe((event) => {
-
       if (event instanceof NavigationStart) {
         NProgress.start();
       }
-
       if (event instanceof NavigationEnd) {
         setTimeout(function() {
           NProgress.done();
         }, 200);
       }
-
     });
   }
 }

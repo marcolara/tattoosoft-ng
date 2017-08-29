@@ -42,7 +42,11 @@ export class PagesLogin implements OnInit {
     }).catch((response: Response) => {
     });
   }
-  clearErrors(): void {
+  forgotPassword(event: any) {
+    event.preventDefault();
+    
+  }
+  private clearErrors(): void {
     this.globalErrors = [];
   }
 }
