@@ -69,7 +69,7 @@ export class PrincipalService {
             return Promise.resolve(this._identity);
           }
         }).catch((res: Response) => {
-          this.handleError(res);
+          return this.handleError(res);
         });
       })
       .catch(this.handleError.bind(this));

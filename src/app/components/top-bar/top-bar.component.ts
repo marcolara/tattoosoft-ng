@@ -12,12 +12,12 @@ export class TopBarComponent {
   constructor(private _principal: PrincipalService, private router: Router) {
     _principal.identity().then(_identity => {
       this.identity = _identity;
-    });
+    }).catch(data => {});
   }
 
   logout(event: any) {
     event.preventDefault();
     this._principal.clearAccess();
-    this.router.navigate(['/pages/login']);
+    this.router.navigate(['/login']);
   }
 }

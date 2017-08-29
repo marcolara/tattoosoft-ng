@@ -14,13 +14,13 @@ export class AuthGuard implements CanActivate {
     this._principal.identity().then((identity: Identity) => {
       if (route.data && route.data.roles && !this._principal.isInAnyRole(route.data.roles)) {
         if (!this._principal.isAuthenticated) {
-          this.router.navigate(['/pages/accessdenied ']); // user is signed in but not authorized for desired state
+          this.router.navigate(['/accessdenied ']); // user is signed in but not authorized for desired state
         } else {
-          this.router.navigate(['/pages/login']);
+          this.router.navigate(['/login']);
         }
       }
     }).catch((identity: Identity) => {
-      this.router.navigate(['/pages/login']);
+      this.router.navigate(['/login']);
     });
     return true;
   }
