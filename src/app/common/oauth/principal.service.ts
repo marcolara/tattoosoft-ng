@@ -3,6 +3,7 @@ import {Http, Response, Headers, RequestOptions, URLSearchParams} from '@angular
 import 'rxjs/add/operator/toPromise';
 import {AppSettings} from '../../app.settings';
 import {GhQueryEncoder} from '../misc/ghqueryencoder';
+import {HTTPStatusCodes} from '../misc/http-status-codes';
 import {Identity} from './identity';
 import {LoginCredentials} from './login-credentials';
 import {CookieService} from 'angular2-cookie/core';
@@ -98,6 +99,17 @@ export class PrincipalService {
     this._cookieService.remove('access_token');
     this._cookieService.remove('refreshToken');
   }
+  public resetPassword(): Promise<any> {
+    return this.http
+      .post(AppSettings.API_ENDPOINTS.pwd_reset, AppSettings.REQUEST.json_options)
+      .toPromise()
+      .then((res: Response) => {
+        return Promise.resolve(res);
+      })
+      .catch((res: Response) => {
+        return this.handleError(res);
+      });
+  }
   private extractToken(res: Response): string {
     let body = res.json();
     let opts: CookieOptionsArgs = {
@@ -113,17 +125,8 @@ export class PrincipalService {
     return this._identity;
   }
   private handleError(response: Response | any): Promise<any> {
-    this.clearAccess();
-    switch(response.status) {
-      case 0:
-        this.errorHandled$.emit({
-          value: "ERR_CONNECTION_REFUSED"
-        });
-      case 500:
-         this.errorHandled$.emit({
-          value: "ERR_FATAL"
-        });
-      default:
+    if (response.status) {
+      this.errorHandled$.emit(response.status);
     }
     return Promise.reject(response.message || response);
   }

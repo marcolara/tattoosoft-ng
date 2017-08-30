@@ -27,6 +27,7 @@ export class AppSettings {
 
   public static API_ENDPOINTS = {
     identity: '//' + AppSettings.REQUEST.resource_host + '/tattoosoft-oauth-resource/user/extra',
+    pwd_reset: '//' + AppSettings.REQUEST.resource_host + '/tattoosoft-oauth-resource/user/password/reset',
     token: '//' + AppSettings.REQUEST.web_host + '/oauth/token'
   };
 }
