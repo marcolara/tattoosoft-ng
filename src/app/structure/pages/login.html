@@ -32,13 +32,13 @@
 							<strong>Log in</strong>
 						</h4>
 						<br />
-						<div *ngIf="loginErrors?.length > 0" class="alert alert-danger" role="alert">
+						<div *ngIf="loginErrors" class="alert alert-danger" role="alert">
 							<button aria-label="Close" class="close" type="button" (click)="clearErrors()">
 								<span aria-hidden="true">×</span>
 							</button>
-							<strong>Oh snap!</strong> There was an error with your request.
+							<span *ngIf="loginErrors === 400"><h5>Invalid request!</h5> Email or password are invalid.</span>
+							<span *ngIf="loginErrors === 500"><h5>Oh snap!</h5> There was an error with your request.</span>
 						</div>
-
 						<form (ngSubmit)="login($event)" #loginForm="ngForm">
 							<div class="form-group">
 								<label class="form-label" for="username">Email address</label> <input
@@ -77,7 +77,7 @@
 							</div>
 							<div class="form-actions">
 								<button type="submit" class="btn btn-primary mr-3"
-									[disabled]="loginForm.invalid">Sign In</button>
+									[disabled]="loginForm.invalid">Sign In<i class="fa fa-cog fa-spin fa-lg fa-fw" *ngIf="loginSubmitPending"></i><span class="sr-only">Loading...</span></button>
 								<span class="register-link"> <a href=""
 									class="cat__core__link--blue cat__core__link--underlined">Register</a>
 									if you don't have account
@@ -142,16 +142,17 @@
 			<form (ngSubmit)="forgotPassword($event)"
 					#forgotPasswordForm="ngForm">
 				<div class="modal-body mb-5">
-					<div *ngIf="resetPwErrors?.length > 0" class="alert alert-danger" role="alert">
+					<div *ngIf="resetPwErrorCode" class="alert alert-danger" role="alert">
 						<button aria-label="Close" class="close" type="button" (click)="clearErrors()">
 							<span aria-hidden="true">×</span>
 						</button>
-						<strong>Oh snap!</strong> There was an error with your request.
+						<span *ngIf="resetPwErrorCode === 400 && resetPwErrorMsg"><h5>Invalid request!</h5> {{resetPwErrorMsg}}</span>
+						<span *ngIf="resetPwErrorCode === 500"><h5>Oh snap!</h5> There was an error with your request.</span>
 					</div>
 					<div class="form-group">
 						<label class="form-label" for="username">Enter your
 							TattooSoft email address that you used to register. We'll send
-							you an email with a one-time use link to reset your password.
+							you an email with a one-time use temporary password that will allow you to access your account and change your password.
 							Please note that this link will expire in 24hrs.</label> <input
 							id="username" class="form-control" placeholder="name@company.com"
 							name="username" type="email" [(ngModel)]="model.username"
@@ -169,7 +170,8 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn" data-dismiss="modal" #closeModal (click)="clearErrors()">Close</button>
-					<button type="submit" class="btn btn-primary" [disabled]="forgotPasswordForm.invalid">Send Me Instructions</button>
+					<button type="submit" class="btn btn-primary" [disabled]="pswResetSubmitPending || forgotPasswordForm.invalid">Send Me Instructions<i class="fa fa-cog fa-spin fa-lg fa-fw" *ngIf="pswResetSubmitPending"></i><span class="sr-only">Loading...</span>
+         			</button>
 				</div>
 			</form>
 		</div>

@@ -1,8 +1,9 @@
-import { HTTPStatusCodes } from '../../common/misc/http-status-codes';
+import {HTTPStatusCodes} from '../../common/misc/http-status-codes';
 import {Identity} from '../../common/oauth/identity';
 import {LoginCredentials} from '../../common/oauth/login-credentials';
 import {PrincipalService} from '../../common/oauth/principal.service';
-import {Component, OnInit, Output, EventEmitter, ElementRef} from '@angular/core';
+import {AnonymousUserService} from '../../common/services/anonymous-user.service';
+import {Component, OnInit, Output, EventEmitter, ElementRef, ViewChild} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 declare var $: any;
@@ -15,19 +16,19 @@ declare var jQuery: any;
 
 export class PagesLogin implements OnInit {
   model: LoginCredentials;
-  loginErrors: number[] = [];
-  resetPwErrors: number[] = [];
-  closeModal: ElementRef;
+  loginErrors: number;
+  resetPwErrorCode: number;
+  resetPwErrorMsg: string;
+  @ViewChild('closeModal') closeModal: ElementRef;
+  pswResetSubmitPending: boolean = false;
+  loginSubmitPending: boolean = false;
 
-  constructor(private _principal: PrincipalService, private router: Router) {
+  constructor(private _principal: PrincipalService, private router: Router, private anonyous: AnonymousUserService) {
     this.model = new LoginCredentials('', '', 'password', 'fooClientIdPassword');
-    this.loginErrors = [];
-//    this._principal.errorHandled$.subscribe((code: HTTPStatusCodes) => {
-//      this.loginErrors.push(code.toString());
-//    });
   }
 
   ngOnInit() {
+    this.clearErrors();
     $(function() {
       // Show/Hide Password
       $('.password').password({
@@ -40,27 +41,44 @@ export class PagesLogin implements OnInit {
 
   login(event: any) {
     event.preventDefault();
+    this.loginSubmitPending = true;
     this.clearErrors();
     this._principal.obtainAccessToken(this.model).then((identity: Identity) => {
       this.router.navigateByUrl(this._principal.redirectUrl ? this._principal.redirectUrl : '/');
+      this.loginSubmitPending = false;
     }).catch((res: Response) => {
-      this.loginErrors.push(res.status);
+      this.loginErrors = res.status;
+      this.loginSubmitPending = false;
     });
   }
 
   forgotPassword(event: any) {
     event.preventDefault();
     this.clearErrors();
-    this._principal.resetPassword().then((res: Response) => {
-       this.closeModal.nativeElement.click();
+    this.pswResetSubmitPending = true;
+    this.anonyous.resetPassword(this.model.username).then((res: Response) => {
+      this.closeModal.nativeElement.click();
+      $.notify({
+        title: '<h5>Temporary password sent</h5>',
+        message: 'We have sent you a temporary password for you to access your account.'
+      }, {
+          type: 'success'
+        });
+      this.pswResetSubmitPending = false;
     }).catch((res: Response) => {
-      this.resetPwErrors.push(res.status);
+      this.resetPwErrorCode = res.status;
+      if (res.status === HTTPStatusCodes.BAD_REQUEST) {
+        let body = res.json();
+        this.resetPwErrorMsg = res.json()['errorMap']['emailAddress'];
+      }
+      this.pswResetSubmitPending = false;
     });
   }
 
   private clearErrors(): void {
-    this.loginErrors = [];
-    this.resetPwErrors = [];
+    this.loginErrors = null;
+    this.resetPwErrorCode = null;
+    this.resetPwErrorMsg = null;
   }
 }
 

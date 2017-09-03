@@ -17,6 +17,7 @@ import {FooterComponent} from './components/footer/footer.component';
 import {StructureModule} from './structure/structure.module';
 import {CookieService} from 'angular2-cookie/services/cookies.service';
 import {PrincipalService} from './common/oauth/principal.service';
+import { AnonymousUserService } from './common/services/anonymous-user.service';
 
 declare var NProgress: any;
 
@@ -37,7 +38,7 @@ declare var NProgress: any;
     NgbModule.forRoot(),
     routing
   ],
-  providers: [CookieService, PrincipalService, AuthGuard],
+  providers: [CookieService, PrincipalService, AuthGuard, AnonymousUserService],
   bootstrap: [AppComponent]
 })
 

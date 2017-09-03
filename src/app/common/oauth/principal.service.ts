@@ -84,7 +84,7 @@ export class PrincipalService {
     }
     AppSettings.REQUEST.json_options.headers.set('Authorization', 'Bearer ' + this._cookieService.get('access_token'));
     return this.http
-      .get(AppSettings.API_ENDPOINTS.identity, AppSettings.REQUEST.json_options)
+      .get(AppSettings.API_ENDPOINTS.user + '/extra', AppSettings.REQUEST.json_options)
       .toPromise()
       .then((res: Response) => {
         return Promise.resolve(this.extractIdentity(res));
@@ -99,9 +99,10 @@ export class PrincipalService {
     this._cookieService.remove('access_token');
     this._cookieService.remove('refreshToken');
   }
-  public resetPassword(): Promise<any> {
+  public resetPassword(email: string): Promise<any> {
+    AppSettings.REQUEST.json_options.headers.set('Authorization', 'Bearer ' + this._cookieService.get('access_token'));
     return this.http
-      .post(AppSettings.API_ENDPOINTS.pwd_reset, AppSettings.REQUEST.json_options)
+      .put(AppSettings.API_ENDPOINTS.user + '/password/reset', {emailAddress: email}, AppSettings.REQUEST.json_options)
       .toPromise()
       .then((res: Response) => {
         return Promise.resolve(res);
