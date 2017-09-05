@@ -41,8 +41,8 @@ export class PagesLogin implements OnInit {
 
   login(event: any) {
     event.preventDefault();
-    this.loginSubmitPending = true;
     this.clearErrors();
+    this.loginSubmitPending = true;
     this._principal.obtainAccessToken(this.model).then((identity: Identity) => {
       this.router.navigateByUrl(this._principal.redirectUrl ? this._principal.redirectUrl : '/');
       this.loginSubmitPending = false;
@@ -79,6 +79,8 @@ export class PagesLogin implements OnInit {
     this.loginErrors = null;
     this.resetPwErrorCode = null;
     this.resetPwErrorMsg = null;
+    this.pswResetSubmitPending = false;
+    this.loginSubmitPending = false;
   }
 }
 
