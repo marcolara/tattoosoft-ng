@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {Router, NavigationStart, NavigationEnd, RouterModule} from '@angular/router';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -17,7 +17,9 @@ import {FooterComponent} from './components/footer/footer.component';
 import {StructureModule} from './structure/structure.module';
 import {CookieService} from 'angular2-cookie/services/cookies.service';
 import {PrincipalService} from './common/oauth/principal.service';
-import { AnonymousUserService } from './common/services/anonymous-user.service';
+import {AnonymousUserService} from './common/services/anonymous-user.service';
+import {FieldErrorsComponent} from './form-errors/field-errors.component';
+import {FormErrorsComponent} from './form-errors/form-errors.component';
 
 declare var NProgress: any;
 
@@ -31,14 +33,18 @@ declare var NProgress: any;
   ],
   imports: [
     BrowserModule,
-    FormsModule,
     HttpModule,
     RouterModule,
     StructureModule,
     NgbModule.forRoot(),
     routing
   ],
-  providers: [CookieService, PrincipalService, AuthGuard, AnonymousUserService],
+  providers: [
+    CookieService,
+    PrincipalService,
+    AuthGuard,
+    AnonymousUserService
+  ],
   bootstrap: [AppComponent]
 })
 
