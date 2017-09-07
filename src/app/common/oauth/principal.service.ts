@@ -56,7 +56,7 @@ export class PrincipalService {
     credentials.grant_type = 'password';
     credentials.client_id = 'fooClientIdPassword';
     let urlSearchParams = new URLSearchParams('', new GhQueryEncoder());
-    urlSearchParams.append('username', credentials.username);
+    urlSearchParams.append('username', credentials.emailAddress);
     urlSearchParams.append('password', credentials.password);
     urlSearchParams.append('grant_type', credentials.grant_type);
     urlSearchParams.append('client_id', credentials.client_id);

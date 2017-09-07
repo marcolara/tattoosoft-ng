@@ -23,6 +23,7 @@
     "@ng-bootstrap/ng-bootstrap": "latest",
     "angular2-cookie": "^1.2.6",
     "core-js": "latest",
+    "ng2-translate": "^5.0.0",
     "npm": "^5.0.4",
     "rxjs": "latest",
     "zone.js": "latest"

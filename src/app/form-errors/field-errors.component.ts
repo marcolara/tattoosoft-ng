@@ -5,7 +5,7 @@ import {Component, OnInit, Input} from '@angular/core';
   selector: 'app-field-errors',
   template: `
   <li *ngFor="let e of errors" class="help is-danger">
-    {{'errors.messages.' + e.error}}
+    {{'errors.messages.field.' + e.error | translate:e.params}}
   </li>
   `
 })

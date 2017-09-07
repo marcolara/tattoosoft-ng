@@ -1,5 +1,5 @@
-import { FieldErrorsComponent } from '../../form-errors/field-errors.component';
-import { FormErrorsComponent } from '../../form-errors/form-errors.component';
+import {FieldErrorsComponent} from '../../form-errors/field-errors.component';
+import {FormErrorsComponent} from '../../form-errors/form-errors.component';
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {Routes, RouterModule} from '@angular/router';
@@ -10,6 +10,8 @@ import {PagesPage404} from './page-404.page';
 import {PagesPage500} from './page-500.page';
 import {PagesRegister} from './register.page';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {Http} from '@angular/http';
+import {TranslateModule, TranslateLoader, TranslateStaticLoader} from 'ng2-translate';
 
 export const routes: Routes = [
   {path: 'lockscreen', component: PagesLockscreen},
@@ -24,7 +26,12 @@ export const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule.forRoot({
+      provide: TranslateLoader,
+      useFactory: (http: Http) => new TranslateStaticLoader(http, '/assets/i18n', '.json'),
+      deps: [Http]
+    })
   ],
   declarations: [
     PagesLockscreen,

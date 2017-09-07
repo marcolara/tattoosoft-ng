@@ -7,8 +7,6 @@ export class AnonymousUserService {
 
   constructor(private http: Http) {}
 
-  @Output() errorHandled$ = new EventEmitter();
-
   public resetPassword(email: string): Promise<any> {
     AppSettings.REQUEST.json_options.headers.delete('Authorization');
     return this.http
@@ -18,14 +16,7 @@ export class AnonymousUserService {
         return Promise.resolve(res);
       })
       .catch((res: Response) => {
-        return this.handleError(res);
+        return Promise.reject(res);
       });
-  }
-
-  private handleError(response: Response | any): Promise<any> {
-    if (response.status) {
-      this.errorHandled$.emit(response.status);
-    }
-    return Promise.reject(response.message || response);
   }
 }

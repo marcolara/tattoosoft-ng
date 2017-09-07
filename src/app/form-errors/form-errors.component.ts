@@ -5,7 +5,7 @@ import {Component, OnInit, Input} from '@angular/core';
   selector: 'app-form-errors',
   template: `
   <div *ngFor="let e of errors" class="notification is-danger">
-    {{'errors.messages.' + e.error}}
+    {{'errors.messages.form.' + e.error | translate:e.params}}
   </div>
   `
 })
