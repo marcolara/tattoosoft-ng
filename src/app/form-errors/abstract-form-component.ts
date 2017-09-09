@@ -41,7 +41,7 @@ export abstract class AbstractFormComponent {
       const errors = this.fetchFieldErrors(body['errorMap'], field);
       control.setErrors(errors);
     });
-    if (fields.length <= 0 && error.status) {
+    if (fields.length <= 0 && error.status >= 0) {
       switch (error.status) {
         case HTTPStatusCodes.BAD_REQUEST:
           if (body['error']) {

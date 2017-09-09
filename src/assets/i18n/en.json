@@ -31,7 +31,10 @@
 				"wrong_length": "is the wrong length (should be {{count}} characters)",
 				"other_than": "must be other than {{count}}",
 				"email_registered": "must be a registered email",
-				"constraints_size": "is too long or too long"
+				"constraints_size": "is too long or too long",
+				"medium-password": "at least one lowercase letter, one uppercase letter, one numeral, and six characters or longer",
+				"strong-password": "not a strong password"
+				
 			},
 			"form": {
 				"0": "The port you are trying to connect to is not actually open.",
