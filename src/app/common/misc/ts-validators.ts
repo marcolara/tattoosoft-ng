@@ -1,3 +1,4 @@
+import {AnonymousUserService} from '../services/anonymous-user.service';
 import {AbstractControl, ValidatorFn} from '@angular/forms';
 
 export class TSValidators {
@@ -12,6 +13,7 @@ export class TSValidators {
     }
     return null;
   };
+
   static mediumPassword: any = function(control: AbstractControl) {
     if (!TSValidators.mediumRegex.test(control.value)) {
       return {

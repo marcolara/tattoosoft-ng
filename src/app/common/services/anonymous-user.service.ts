@@ -1,5 +1,6 @@
 import {AppSettings} from '../../app.settings';
 import {Injectable, Output, EventEmitter} from '@angular/core';
+import { AbstractControl } from '@angular/forms';
 import { Http } from '@angular/http';
 
 @Injectable()
@@ -18,5 +19,9 @@ export class AnonymousUserService {
       .catch((res: Response) => {
         return Promise.reject(res);
       });
+  }
+
+  public validateField(field: string, form: string): Promise<any> {
+    
   }
 }
