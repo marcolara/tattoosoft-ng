@@ -15,8 +15,9 @@ declare var Ladda: any;
 export class PagesRegister extends AbstractFormComponent implements OnInit {
   regForm: FormGroup;
   regButton: any;
+  regFormName: string = 'AccountForm';
 
-  constructor(private anonyous: AnonymousUserService, fb: FormBuilder, translate: TranslateService) {
+  constructor(private anonymous: AnonymousUserService, private fb: FormBuilder, private translate: TranslateService) {
     super(translate);
     this.regForm = fb.group({
       emailAddress: ['', Validators.compose([
@@ -25,8 +26,8 @@ export class PagesRegister extends AbstractFormComponent implements OnInit {
         Validators.minLength(6),
         Validators.email
       ]),
-        Validators.composeAsync([this.validateField])],
-     password: ['', Validators.compose([
+        Validators.composeAsync([this.validateField.bind(this)])],
+      password: ['', Validators.compose([
         Validators.required,
         Validators.maxLength(30),
         Validators.minLength(8),
@@ -40,7 +41,15 @@ export class PagesRegister extends AbstractFormComponent implements OnInit {
   }
 
   validateField(control: AbstractControl): Promise<ValidationResult> {
-    return null;
+    // Avoids initial check against an empty string
+    if (!control.value.length) {
+      Promise.resolve(null);
+    }
+    const q = this.anonymous.validateField(this.getControlName(control), this.regFormName, control.value).then().catch((res: Response) => {
+      this.regButton.stop();
+      return this.handleSubmitError(res, this.regForm);
+    });
+    return q;
   }
 }
 
