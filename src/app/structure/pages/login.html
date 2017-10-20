@@ -139,7 +139,7 @@
 							you an email with a one-time use temporary password that will allow you to access your account and change your password.
 							Please note that this link will expire in 24hrs.</label> 
 							<input
-							id="emailAddress" class="form-control" placeholder="name@company.com"
+							id="emailAddressModal" class="form-control" placeholder="name@company.com"
 							formControlName="emailAddress" type="email" required minlength="6" email [ngClass]="{ 'has-danger': fieldErrors('emailAddress', forgotPasswordForm) }">
 							<div class="form-control-error-list" *ngIf="fieldErrors('emailAddress', forgotPasswordForm)">
 								<ul>

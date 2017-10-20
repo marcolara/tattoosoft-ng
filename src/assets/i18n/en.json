@@ -38,7 +38,8 @@
 			},
 			"form": {
 				"0": "The port you are trying to connect to is not actually open.",
-				"invalid_grant": "Incorrect email or password."
+				"invalid_grant": "Incorrect email or password.",
+				"401": "You aren't authenticated. Please reauthenticate and try again."
 			}
 		}
 	},

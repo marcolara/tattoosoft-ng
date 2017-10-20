@@ -45,11 +45,11 @@ export class PagesRegister extends AbstractFormComponent implements OnInit {
     if (!control.value.length) {
       Promise.resolve(null);
     }
-    const q = this.anonymous.validateField(this.getControlName(control), this.regFormName, control.value).then().catch((res: Response) => {
-      this.regButton.stop();
-      return this.handleSubmitError(res, this.regForm);
+    return this.anonymous.validateField(this.getControlName(control), this.regFormName, control.value)
+      .then().catch((res: Response) => {
+        this.regButton.stop();
+        return this.handleSubmitError(res, this.regForm);
     });
-    return q;
   }
 }
 

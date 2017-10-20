@@ -31,6 +31,10 @@
                         <p>The best way to create, maintain, and track your tattoo, piercings and body modification business.</p>
                         <br />
                         <form (ngSubmit)="register($event)" [formGroup]="regForm">
+                        	<div *ngIf="formErrors(regForm)" class="alert alert-danger" role="alert">
+								<h5>Oh Snap!</h5>
+								<app-form-errors [errors]="formErrors(regForm)"></app-form-errors>
+							</div>
                             <div class="form-group" [ngClass]="{ 'has-danger': fieldErrors('emailAddress', regForm) }">
                                 <div class="form-input-icon form-input-icon-right">
                                     <i class="icmn-spinner11 cat__core__spin"></i>
@@ -58,7 +62,7 @@
                             <div class="form-actions">
                             	By clicking on "Create an account" below, you are agreeing to the <a href="">Terms of Service</a> and the <a href="">Privacy Policy</a>.</div>
                             <div class="form-actions">
-                                <button id="reg-button" type="submit" class="btn btn-primary">Create an account</button>
+                                <button id="reg-button" type="submit" class="btn btn-primary" [disabled]="regForm.invalid">Create an account</button>
                             </div>
                         </form>
                     </div>
